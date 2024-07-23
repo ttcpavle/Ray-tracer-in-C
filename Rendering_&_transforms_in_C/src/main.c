@@ -7,7 +7,7 @@
 /*=======================================================================
 Here in main function you can modify object, export it and render it with local renderer
 You can also run the example below
-=======================================================================*/
+========================================================================*/
 
 int main() {
 	// set up object
