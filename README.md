@@ -33,9 +33,9 @@ Everything is controlled in `main()` function, there is no console or windows in
 5) Render the scene (Color* is image which is array or flat memory matrix of colors)
 6) Export image with `stbi_image_write()` which is available in stb_image_write.h library from Sean Barrett
 
-More info about functions is available in .h or .c files
-
-**REMEMBER TO EDIT CONFIG.H**
+- Info about functions is available in .h or .c files
+- More render examples in Rendering_&_transforms_in_C/renders/
+- **REMEMBER TO EDIT CONFIG.H**
 
 ### Features:
 - faces are triangulated while reading wavefront (fan triangulation)
