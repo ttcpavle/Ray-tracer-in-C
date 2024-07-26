@@ -40,7 +40,7 @@ static void computePrimRay(int x, int y, Ray* primRay, Camera* camera) {
     primRay->direction = normalize(ray.direction);
 }
 
-// Mollder trumbore ray intersection https://www.youtube.com/watch?v=fK1RPmF_zjQ&t=425s
+// Moller trumbore ray intersection https://www.youtube.com/watch?v=fK1RPmF_zjQ&t=425s
 static int Ray_Triangle_Intersect(Vector3 v0, Vector3 v1, Vector3 v2, Ray ray, float* u, float* v, float* t) {
     Vector3 edge1 = vector_sub(v1, v0);
     Vector3 edge2 = vector_sub(v2, v0);
@@ -119,11 +119,6 @@ static int Intersect(Object3D* object, Ray ray, Vector3* pHit, Vector3* nHit, fl
     *Distance = t_min;
     return intersect;
 }
-
-Vector3 reflect(Vector3 I, Vector3 N) {
-    return vector_sub(I, scale(N, 2.0f * dot(I, N)));
-}
-
 
 // Calculate color for individual pixel, shading
 // Works only for single light in scene
