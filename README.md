@@ -43,18 +43,18 @@ Everything is controlled in `main()` function, there is no console or windows in
 - Moller Trumbore algorighm is used for ray triangle intersection
 - Gauss-Jordan algorithm is used for inverse matrix
 - You can follow render progress on console
+- Smooth shaded object (Gouraud shading)
 
 ### Not supported:
 - preserving group information in .obj files
 - reading .mtl files
 - rendering multiple objects/lights and shadows
 - preserving n-gon faces
-- smooth shading
+- using isGlass property
 - undo transforms
 
 ### Improvement to do:
 - Render multiple objects/lights
 - Better shading with isGlass information (reflection and refraction)
-- smooth shading
 - Origin of object and fixes for scaling
 - OpenGL or windows.h for GUI
