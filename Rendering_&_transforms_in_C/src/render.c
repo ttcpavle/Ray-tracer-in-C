@@ -90,24 +90,31 @@ static int Ray_Triangle_Intersect(Vector3 v0, Vector3 v1, Vector3 v2, Ray ray, f
     return 1;
 }
 
-// checks for interection for all faces in object, updates point at which object was hit, normal of hit face
+// Checks for interection for all faces in object, updates point at which object was hit, normal of hit face
 // and distance between camera eye and hit point
 static int Intersect(Object3D* object, Ray ray, Vector3* pHit, Vector3* nHit, float* Distance) {
 
     int intersect = 0;
     float t_min = INFINITY;
     for (int i = 0; i < object->num_faces; i++) {
-        Vector3 v0 = object->vertices[object->faces[i].v_indices[0]-1];
-        Vector3 v1 = object->vertices[object->faces[i].v_indices[1]-1];
-        Vector3 v2 = object->vertices[object->faces[i].v_indices[2]-1];
+        Vector3 v0 = object->vertices[object->faces[i].v_indices[0] - 1];
+        Vector3 v1 = object->vertices[object->faces[i].v_indices[1] - 1];
+        Vector3 v2 = object->vertices[object->faces[i].v_indices[2] - 1];
+        Vector3 n0 = object->normals[object->faces[i].vn_indices[0] - 1];
+        Vector3 n1 = object->normals[object->faces[i].vn_indices[1] - 1];
+        Vector3 n2 = object->normals[object->faces[i].vn_indices[2] - 1];
         float t, u, v;
         if (Ray_Triangle_Intersect(v0, v1, v2, ray, &u, &v, &t) && t < t_min) {
             t_min = t;
             if (!object->smooth) {
-                *nHit = object->normals[object->faces[i].vn_indices[0]-1];
+                *nHit = n0; // assuming n0,n1,n2 are the same normal (face normal)
             }
             else {
-                *nHit = normalize(cross(vector_sub(v1, v0), vector_sub(v2, v0)));
+                // Interpolated normal for smooth shading (Gouraud shading) - if object is smooth shaded
+                nHit->x = (1 - u - v) * n0.x + u * n1.x + v * n2.x;
+                nHit->y = (1 - u - v) * n0.y + u * n1.y + v * n2.y;
+                nHit->z = (1 - u - v) * n0.z + u * n1.z + v * n2.z;
+                *nHit = normalize(*nHit); //make sure normal is normalized
             }
             pHit->x = (1 - u - v) * v0.x + u * v1.x + v * v2.x;
             pHit->y = (1 - u - v) * v0.y + u * v1.y + v * v2.y;
@@ -148,7 +155,7 @@ static Color Trace(Object3D* objects[], Light lights[], int num_obj, int num_lig
         return backgroundColor;
 
     if (object->isGlass && depth <= MAX_RAY_DEPTH) {
-
+        // TO DO: implement frensel equation (calculating color using reflection and refraction index)
         return blue;
     }
     else if (!object->isGlass) {

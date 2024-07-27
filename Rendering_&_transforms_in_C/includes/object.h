@@ -32,7 +32,6 @@ typedef struct Object3D {
 	//FOR LOCAL RENDERING
 	int isGlass;
 	Color color;
-	t_matrix obj_to_world;
 	Vector3 origin;
 }Object3D;
 

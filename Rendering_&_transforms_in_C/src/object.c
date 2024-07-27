@@ -18,6 +18,7 @@ void Rotate_Object_X(Object3D* object, float angle_Deg) {
 	t_matrix inv = inverse(r);
 	for (int i = 0; i < object->num_normals; i++) {
 		transform_vector(inv, &object->normals[i]);
+		object->normals[i] = normalize(object->normals[i]);
 	}
 	for (int i = 0; i < object->num_vertices; i++) {
 		transform_vector(r, &object->vertices[i]);
@@ -34,6 +35,7 @@ void Rotate_Object_Y(Object3D* object, float angle_Deg) {
 	t_matrix inv = inverse(r);
 	for (int i = 0; i < object->num_normals; i++) {
 		transform_vector(inv, &object->normals[i]);
+		object->normals[i] = normalize(object->normals[i]);
 	}
 	for (int i = 0; i < object->num_vertices; i++) {
 		transform_vector(r, &object->vertices[i]);
@@ -49,7 +51,8 @@ void Rotate_Object_Z(Object3D* object, float angle_Deg) {
 	t_matrix r = t_rotate_z(degrees_to_radians(angle_Deg));
 	t_matrix inv = inverse(r);
 	for (int i = 0; i < object->num_normals; i++) {
-		transform_vector(inv, &object->normals[i]);//inverse(r)
+		transform_vector(inv, &object->normals[i]);
+		object->normals[i] = normalize(object->normals[i]);
 	}
 	for (int i = 0; i < object->num_vertices; i++) {
 		transform_vector(r, &object->vertices[i]);
@@ -67,6 +70,7 @@ void Quaternion_Rotate(Object3D* object, Vector3 axis, float angle_Deg) {
 	t_matrix inv = inverse(r);
 	for (int i = 0; i < object->num_normals; i++) {
 		transform_vector(inv, &object->normals[i]);
+		object->normals[i] = normalize(object->normals[i]);
 	}
 	for (int i = 0; i < object->num_vertices; i++) {
 		transform_vector(r, &object->vertices[i]);
@@ -83,6 +87,7 @@ void Rotate_Euler_ZYX(Object3D* object, float roll, float pitch, float yaw) {
 	t_matrix inv = inverse(r);
 	for (int i = 0; i < object->num_normals; i++) {
 		transform_vector(inv, &object->normals[i]);
+		object->normals[i] = normalize(object->normals[i]);
 	}
 	for (int i = 0; i < object->num_vertices; i++) {
 		transform_vector(r, &object->vertices[i]);
@@ -240,9 +245,8 @@ Object3D* Read_Wavefront(char* filename) {
 		newobject->faces[i].vn_indices = (int*)malloc(sizeof(int) * 3);
 	}
 
-	// Initial material of object
+	// Initialize material for local rendering and origin
 	newobject->isGlass = 0;
-	newobject->obj_to_world = identity();
 	newobject->origin = vector_zero;
 	newobject->color = red;
 

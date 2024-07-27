@@ -18,6 +18,6 @@ const Color teal = { 0, 128, 128 };
 const Color navy = { 0, 0, 128 };
 const Color olive = { 128, 128, 0 };
 const Color maroon = { 128, 0, 0 };
-const Color lime = { 0, 255, 0 };
+const Color lime = { 50, 205, 50 };
 const Color gold = { 255, 215, 0 };
 const Color black = { 0, 0, 0 };
