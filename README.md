@@ -6,7 +6,7 @@
 ## What does this program do
 You can:
 - read/export wavefront files (files used for 3d objects with .obj extension)
-- do basic transformations on objects such as rotatoin, scale and translation
+- do basic transformations on objects such as rotation, scale and translation
 - render object with simple local renderer
 
 ## How to run
