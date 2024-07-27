@@ -25,7 +25,7 @@ https://learn.microsoft.com/en-us/visualstudio/get-started/tutorial-open-project
 https://github.com/MicrosoftDocs/visualstudio-docs/blob/main/docs/get-started/tutorial-open-project-from-repo.md
 
 ## How to use
-Everything is controlled in `main()` function, there is no console or windows interface, this is only a simple rendering software. You can see in the example how thing are set up:
+Everything is controlled in `main()` function, there is no console or windows interface, this is only a simple rendering software. You can see in the example how things are set up:
 1) Adjust settings in config.h accoring to your preferences
 2) Read object, set material, transform it and export it if you want
 3) Set up objects array and lights array (currently rendering supports a single object and light)
@@ -48,11 +48,13 @@ Everything is controlled in `main()` function, there is no console or windows in
 - preserving group information in .obj files
 - reading .mtl files
 - rendering multiple objects/lights and shadows
-- n-gon faces and smooth shading
+- preserving n-gon faces
+- smooth shading
 - undo transforms
 
 ### Improvement to do:
 - Render multiple objects/lights
 - Better shading with isGlass information (reflection and refraction)
+- smooth shading
 - Origin of object and fixes for scaling
 - OpenGL or windows.h for GUI
