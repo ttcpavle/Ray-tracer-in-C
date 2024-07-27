@@ -112,6 +112,11 @@ void Object_Scale_XYZ(Object3D* object, float factor_x, float factor_y, float fa
 		return;
 	}
 	t_matrix s = t_scale_xyz(factor_x, factor_y, factor_z);
+	t_matrix inv = inverse(s);
+	for (int i = 0; i < object->num_normals; i++) {
+		transform_vector(inv, &object->normals[i]);
+		object->normals[i] = normalize(object->normals[i]);
+	}
 	for (int i = 0; i < object->num_vertices;i++) {
 		transform_vector(s, &object->vertices[i]);
 	}
@@ -127,7 +132,6 @@ void Object_Translate_XYZ(Object3D* object, float tx, float ty, float tz) {
 	for (int i = 0; i < object->num_vertices;i++) {
 		transform_point(t, &object->vertices[i]);
 	}
-	//NORMALS ALSO HAVE TO BE UPDATED
 	printf("Object <%s> translated\n", object->name);
 }
 
@@ -431,6 +435,8 @@ void Set_Material_OBJ(Object3D* object, int isGlass, Color color) {
 	object->isGlass = isGlass;
 	printf("Material set for <%s>\n", object->name);
 }
+
+// Functions below are for debugging
 
 void print_faces_test(Object3D* object) {
 	for (int i = 0; i < object->num_faces; i++) {
