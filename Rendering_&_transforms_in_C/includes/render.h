@@ -26,7 +26,6 @@ typedef struct {
  FUNCTION: Render
  Allocates memory for Color* (image as array/matrix of colors) and assigns each pixel a color computed
  with shading algorithms (currently a very simple shader)
- -doesn't support smooth shading and textures
  -set up objects, lights, camera, materials before using
  -currently supports only 1 object and 1 light in array!!!
 =======================================================================*/

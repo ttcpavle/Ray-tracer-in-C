@@ -128,7 +128,7 @@ t_matrix transpose(t_matrix m) {
 		}
 	};
 }
-//for debugging
+// print_mat() is for debugging
 static void print_mat(t_matrix m) {
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
@@ -171,7 +171,7 @@ t_matrix inverse(t_matrix mat) {
 			}
 		}
 	}
-	//   (2) eliminate below diagonal
+	//    (2) eliminate below diagonal
 	for (int i = 0; i < 3; i++) {
 		for (int j = i + 1; j < 4; j++) {
 			if (mat.matrix[j][i] == 0.0f) continue;
@@ -183,7 +183,7 @@ t_matrix inverse(t_matrix mat) {
 			mat.matrix[j][i] = 0.f;
 		}
 	}
-	//    (3) set diagonal elements to zero
+	//    (3) set diagonal elements to one
 	for (int i = 0; i < 4; i++) {
 		if (mat.matrix[i][i] == 0.0f) {
 			fprintf(stderr, "Singular matrix, couldn't invert\n");
